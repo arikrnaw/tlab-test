@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('resep_makanan', function (Blueprint $table) {
             $table->id();
             $table->string('nama_resep');
-            $table->foreignId('id_kategori_makanan')->constrained('kategori_makanan')->cascadeOnDelete();
+            $table->foreignId('id_kategori_makanan')->constrained('kategori_makanans')->cascadeOnDelete();
             $table->foreignId('id_bahan')->constrained('bahan_makanan')->cascadeOnDelete();
             $table->text('deskripsi');
             $table->timestamps();
-            $table->string('deleted_at');
+            $table->string('deleted_at')->nullable();
         });
     }
 

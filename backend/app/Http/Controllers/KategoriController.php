@@ -17,7 +17,8 @@ class KategoriController extends Controller
         $request->validate([
             'nama_kategori' => 'required|string|max:255',
         ]);
-         return $kategori = kategoriMakanan::create($request->all());
+         return kategoriMakanan::create($request->all());
+
     }
 
     public function show($id)

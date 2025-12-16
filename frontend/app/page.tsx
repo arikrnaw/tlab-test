@@ -1,5 +1,16 @@
 "use client";
 
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
+
 import { useEffect, useState } from "react";
 type Resep = {
   id: number;
@@ -39,6 +50,7 @@ type Resep = {
 
 export default function DaftarResep() {
   const [resep, setResep] = useState<Resep[]>([]);
+  const [kategoriMakanan, setKategoriMakanan] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchResep = async () => {
@@ -49,14 +61,39 @@ export default function DaftarResep() {
     fetchResep();
   }, []);
 
+  useEffect(() => {
+    const fetchKategoriMakanan = async () => {
+      const response = await fetch("http://localhost:8000/api/kategori");
+      const data = await response.json();
+      setKategoriMakanan(data);
+    };
+    fetchKategoriMakanan();
+  }, []);
+
   return (
     <div>
-      <h1>Daftar Resep</h1>
-      <ul>
-        {resep.map((resep) => (
-          <li key={resep.id}>{resep.nama_resep}</li>
-        ))}
-      </ul>
+      <Button>Submit</Button>
+      <TableCaption>Daftar Resep</TableCaption>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-[100px]">ID</TableHead>
+            <TableHead>Nama Resep</TableHead>
+            <TableHead>Kategori Makanan</TableHead>
+            <TableHead>Deskripsi</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {resep.map((resep) => (
+            <TableRow key={resep.id}>
+              <TableCell className="font-medium">{resep.id}</TableCell>
+              <TableCell>{resep.nama_resep}</TableCell>
+              <TableCell>{resep.id_kategori_makanan}</TableCell>
+              <TableCell>{resep.deskripsi}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     </div>
   );
 }

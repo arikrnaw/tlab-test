@@ -21,7 +21,7 @@ class ResepController extends Controller
         {
            $request->validate([
                'nama_resep' => 'required|string|max:255',
-               'id_kategori_makanan' => 'required|exists:kategori_makanan,id',
+               'id_kategori_makanan' => 'required|exists:kategori_makanans,id',
                'deskripsi' => 'required|string',
            ]); 
            
@@ -38,7 +38,7 @@ class ResepController extends Controller
         {
             $request->validate([
                 'nama_resep' => 'required|string|max:255',
-                'id_kategori_makanan' => 'required|exists:kategori_makanan,id',
+                'id_kategori_makanan' => 'required|exists:kategori_makanans,id',
                 'deskripsi' => 'required|string',
             ]);
 

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nama_bahan');
             $table->text('satuan');
             $table->timestamps();
-            $table->string('deleted_at');
+            $table->string('deleted_at')->nullable();
         });
     }
 
